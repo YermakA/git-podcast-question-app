@@ -1,5 +1,6 @@
 import './styles.css';
 import { isValid } from './utils';
+import { Question } from './question.js'
 
 const form = document.getElementById('form');
 const input = form.querySelector('#questions-input');
