@@ -1,4 +1,5 @@
 import './styles.css';
+import { authWithEmailAndPassword, getAuthForm } from './auth';
 import { isValid, createModal } from './utils';
 import { Question } from './question.js'
 
@@ -32,12 +33,23 @@ function submitFormHandler(event) {
       sumbitBtn.disabled = false;
     }
     );
-
-
-    console.log("Question", question);
   }
 }
 
+
 function openModal() {
-  createModal('Авторизация', `<h1>Test</h1>`);
+  createModal('Авторизация', getAuthForm());
+  document.getElementById('auth-form')
+    .addEventListener('submit',
+      authFormHandler, { once: true });
 }
+
+
+
+function authFormHandler(event) {
+  event.preventDefault();
+
+  const email = event.target.querySelector('#email').value;
+  const password = event.target.querySelector('#password').value;
+  authWithEmailAndPassword(email, password);
+}.then(Question.fetch)

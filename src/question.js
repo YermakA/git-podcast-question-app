@@ -23,9 +23,15 @@ export class Question {
       : `<div class="mui--text-headline">Вы пока ничего не спрашивали</div>`;
 
     const list = document.getElementById('questions_list');
-    console.log(list);
-    console.log(html);
     list.innerHTML = html;
+  }
+
+  static fetch(token) {
+    return fetch(`https://yermaka-47016-default-rtdb.firebaseio.com/questions.json${token}`)
+      .then(response => response.json())
+      .then(questions => {
+        console.log('Questions', questions);
+      })
   }
 }
 
